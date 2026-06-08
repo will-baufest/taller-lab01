@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.auth import (
     ACCESS_TOKEN_EXPIRE_SECONDS,
@@ -13,6 +14,14 @@ app = FastAPI(
     title="JWT Auth API",
     description="FastAPI application implementing JWT authentication",
     version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
